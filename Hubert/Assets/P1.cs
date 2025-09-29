@@ -12,8 +12,8 @@ public class P1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isPressingUp = Input.Getkey(KeyCode.W);
-        bool isPressingDown = Input.Getkey(KeyCode.S);
+        bool isPressingUp = UnityEngine.Input.GetKey(KeyCode.W);
+        bool isPressingDown = UnityEngine.Input.GetKey(KeyCode.S);
 
         if (isPressingUp)
         {
