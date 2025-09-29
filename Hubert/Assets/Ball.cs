@@ -3,8 +3,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public Rigidbody2D rb;
-
     public float startingspeed;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +20,7 @@ public class Ball : MonoBehaviour
 
         float yVelocity = UnityEngine.Random.Range(-1, 1);
         
-        rb.linearVelocity = new Vector2(xVelocity, yVelocity);
+        rb.linearVelocity = new Vector2(xVelocity * startingspeed, yVelocity * startingspeed);
     }
 
     // Update is called once per frame
