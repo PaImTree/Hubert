@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Windows;
 
-public class P1 : MonoBehaviour
+public class P2 : MonoBehaviour
 {
     public float moveSpeed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,8 +12,8 @@ public class P1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isPressingUp = UnityEngine.Input.GetKey(KeyCode.W);
-        bool isPressingDown = UnityEngine.Input.GetKey(KeyCode.S);
+        bool isPressingUp = UnityEngine.Input.GetKey(KeyCode.UpArrow);
+        bool isPressingDown = UnityEngine.Input.GetKey(KeyCode.DownArrow);
 
         if (isPressingUp)
         {
