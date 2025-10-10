@@ -1,31 +1,48 @@
 using UnityEngine;
+using System.Collections; // Needed for IEnumerator (coroutines)
 
 public class Ball : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float startingspeed;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float startingSpeed = 5f;
+    public float resetDelay = 1.5f; // Wait time before relaunch
+
     void Start()
     {
-        bool isRight = UnityEngine.Random.value >= 0.5;
-
-        float xVelocity = -1f;
-        
-        if (isRight == true)
-        {
-            xVelocity = 1f;
-        }
-
-
-        float yVelocity = UnityEngine.Random.Range(-1, 1);
-        
-        rb.linearVelocity = new Vector2(xVelocity * startingspeed, yVelocity * startingspeed);
+        LaunchBall();
     }
 
-    // Update is called once per frame
-    void Update()
+    void LaunchBall()
     {
-        
+        float xDirection = UnityEngine.Random.value < 0.5f ? -1f : 1f;
+        float yDirection = UnityEngine.Random.Range(-0.8f, 0.8f);
+
+        Vector2 direction = new Vector2(xDirection, yDirection).normalized;
+        rb.linearVelocity = direction * startingSpeed;
+    }
+
+    public void ResetBall()
+    {
+        // Stop movement and center the ball
+        rb.linearVelocity = Vector2.zero;
+        transform.position = Vector2.zero;
+
+        // Relaunch after a short delay
+        StartCoroutine(LaunchAfterDelay());
+    }
+
+    private IEnumerator LaunchAfterDelay()
+    {
+        yield return new WaitForSeconds(resetDelay);
+        LaunchBall();
+    }
+
+    // Detect if ball hits a goal zone
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Goal"))
+        {
+            ResetBall();
+        }
     }
 }
